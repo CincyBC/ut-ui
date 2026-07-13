@@ -5,10 +5,18 @@
  *   export default [...utui];
  * Complements scripts/check-brand.sh (which also covers .astro files).
  */
+import tseslint from "typescript-eslint";
+
 export default [
   {
     files: ["src/**/*.{ts,tsx,js,jsx}"],
     ignores: ["**/node_modules/**", "**/dist/**"],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+    },
     rules: {
       "no-restricted-syntax": [
         "error",
