@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "@uraniumtech/ui",
+  "description": "Machine-readable component catalog. Human/agent version: llms.txt",
+  "components": [
+    {
+      "name": "Button",
+      "import": "import { Button } from '@uraniumtech/ui'",
+      "source": "src/components/Button.tsx",
+      "replaces": ["hand-styled <button>", ".btn-* classes"],
+      "props": "variant?='primary'|'accent'|'ghost'; size?='sm'|'md'; native button props",
+      "example": "<Button variant=\"ghost\" size=\"sm\">Reset</Button>"
+    },
+    {
+      "name": "Kicker",
+      "import": "import { Kicker } from '@uraniumtech/ui'",
+      "source": "src/components/Kicker.tsx",
+      "replaces": ["hand-styled uppercase section labels"],
+      "props": "children; className?",
+      "example": "<Kicker>Supply & Demand</Kicker>"
+    },
+    {
+      "name": "Badge",
+      "import": "import { Badge } from '@uraniumtech/ui'",
+      "source": "src/components/Badge.tsx",
+      "replaces": ["inline status pills like bg-green-500/20"],
+      "props": "tone?='neutral'|'green'|'teal'|'petrol'|'amber'|'rust'; children",
+      "example": "<Badge tone=\"amber\">Stale</Badge>"
+    },
+    {
+      "name": "StatusBadge",
+      "import": "import { StatusBadge } from '@uraniumtech/ui'",
+      "source": "src/components/Badge.tsx",
+      "replaces": ["status pills with dots"],
+      "props": "tone?; children",
+      "example": "<StatusBadge tone=\"green\">Operational</StatusBadge>"
+    },
+    {
+      "name": "Card",
+      "import": "import { Card } from '@uraniumtech/ui'",
+      "source": "src/components/Card.tsx",
+      "replaces": ["bg-[#27293d] card divs", "hand-rolled cards"],
+      "props": "title?; label?; headerContent?; live?; className?; children",
+      "example": "<Card title=\"Forward Curve\" label=\"Numerco\">…</Card>"
+    },
+    {
+      "name": "PageHeader",
+      "import": "import { PageHeader } from '@uraniumtech/ui'",
+      "source": "src/components/PageHeader.tsx",
+      "replaces": ["hand-rolled page title blocks"],
+      "props": "title; kicker?; description?; actions?",
+      "example": "<PageHeader title=\"Reactor Data\" kicker=\"IAEA PRIS\" />"
+    },
+    {
+      "name": "StatCard",
+      "import": "import { StatCard } from '@uraniumtech/ui'",
+      "source": "src/components/StatCard.tsx",
+      "replaces": ["KPI/stat tiles", "legacy StatsCard"],
+      "props": "value; label?; icon?; accent?='green'|'teal'|'petrol'|'amber'|'rust'; delta?={value,format?}; footer?; live?",
+      "example": "<StatCard value=\"$82.50\" label=\"Spot U3O8\" accent=\"green\" delta={{ value: 1.25 }} />"
+    },
+    {
+      "name": "SegmentedControl",
+      "import": "import { SegmentedControl } from '@uraniumtech/ui'",
+      "source": "src/components/SegmentedControl.tsx",
+      "replaces": ["filter button rows (MAX/5Y/1Y/1M/1W pattern)"],
+      "props": "options; value; onChange; size?; ariaLabel (required)",
+      "example": "<SegmentedControl options={['MAX','5Y','1Y']} value={r} onChange={setR} ariaLabel=\"Time range\" />"
+    },
+    {
+      "name": "Tabs",
+      "import": "import { Tabs } from '@uraniumtech/ui'",
+      "source": "src/components/Tabs.tsx",
+      "replaces": ["hand-rolled tab bars"],
+      "props": "tabs; value; onChange; ariaLabel; children?",
+      "example": "<Tabs tabs={[{value:'us',label:'US'}]} value=\"us\" onChange={setR} ariaLabel=\"Region\" />"
+    },
+    {
+      "name": "Tooltip",
+      "import": "import { Tooltip } from '@uraniumtech/ui'",
+      "source": "src/components/Tooltip.tsx",
+      "replaces": ["title attributes", "hand-rolled hover popups"],
+      "props": "content; side?; children",
+      "example": "<Tooltip content=\"lbs U3O8\"><button>?</button></Tooltip>"
+    },
+    {
+      "name": "DataTable",
+      "import": "import { DataTable } from '@uraniumtech/ui'",
+      "source": "src/components/DataTable.tsx",
+      "replaces": ["any raw <table> markup"],
+      "props": "columns {key,header,cell?,numeric?,sortable?,sortValue?,align?,width?}[]; rows; getRowKey; defaultSort?; stickyHeader?=true; density?; onRowClick?; emptyState?; caption?",
+      "example": "<DataTable rows={rows} getRowKey={r=>r.id} columns={[{key:'name',header:'Reactor',sortable:true}]} />"
+    },
+    {
+      "name": "LineChart",
+      "import": "import { LineChart } from '@uraniumtech/ui'",
+      "source": "src/charts/LineChart.tsx",
+      "replaces": ["d3.select code", "hand-rolled svg line charts"],
+      "props": "series {id,label?,data:{x,y}[],color?,dashed?,area?}[]; height?; yFormat?; grid?; tooltip?; legend?; zeroBaseline?=false; ariaLabel (required)",
+      "example": "<LineChart ariaLabel=\"Spot\" series={[{id:'spot',data:pts}]} />"
+    },
+    {
+      "name": "BarChart",
+      "import": "import { BarChart } from '@uraniumtech/ui'",
+      "source": "src/charts/BarChart.tsx",
+      "replaces": ["d3 bar code", "hand-rolled svg bars"],
+      "props": "series {id,label?,color?,data:{category,value}[]}[]; stacked?=true; height?; yFormat?; legend?; tooltip?; ariaLabel (required)",
+      "example": "<BarChart ariaLabel=\"Imports\" series={[{id:'ca',data:rows}]} />"
+    }
+  ]
+}

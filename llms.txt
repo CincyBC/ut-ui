@@ -1,0 +1,124 @@
+# @uraniumtech/ui — component catalog for coding agents
+
+Uranium Technologies design system. Import components from `@uraniumtech/ui`;
+import tokens with `@import "@uraniumtech/ui/tokens.css"` in the consumer's global.css
+(plus `@source "../../node_modules/@uraniumtech/ui/src";` so Tailwind v4 scans library classes).
+
+RULES:
+- Never re-implement anything listed here. If a needed component is missing, add it to
+  the ut-ui repo (component + test + docs entry + manifest entry), tag a release, consume it.
+- Never use raw hex colors, `bg-[#...]` arbitrary values, or Tailwind default palette colors
+  (blue-*, indigo-*, purple-*, slate-*, gray-* surfaces). Use brand tokens:
+  ink, petrol, petrol-light, steel, silver, reactor, isotope, glow, paper, gunmetal,
+  surface-dark, border-dark, paper-text, amber-alert, rust — plus semantic ut-bg, ut-surface,
+  ut-text, ut-muted, ut-border, ut-accent (theme-aware; prefer these).
+- Dark mode: set `data-theme="dark"` on <html> or <body>. Semantic tokens flip automatically.
+- Never call d3 directly in app code — use LineChart/BarChart.
+
+## Button
+import { Button } from '@uraniumtech/ui'
+Brand button. variants: primary (petrol), accent (reactor green — max one per view), ghost.
+REPLACES: any hand-styled <button>, .btn-* class soup.
+PROPS: variant?='primary'|'accent'|'ghost'; size?='sm'|'md'; ...native button props
+EXAMPLE: <Button variant="ghost" size="sm" onClick={reset}>Reset</Button>
+
+## Kicker
+import { Kicker } from '@uraniumtech/ui'
+Uppercase letter-spaced section label flanked by rules (the "— ANALYTICS —" lockup).
+REPLACES: hand-styled uppercase section labels.
+PROPS: children; className?
+EXAMPLE: <Kicker>Supply &amp; Demand</Kicker>
+
+## Badge / StatusBadge
+import { Badge, StatusBadge } from '@uraniumtech/ui'
+Small uppercase chip; StatusBadge adds the hexagonal status dot (logo motif).
+REPLACES: inline `bg-green-500/20 text-green-500` status pills.
+PROPS: tone?='neutral'|'green'|'teal'|'petrol'|'amber'|'rust'; children
+EXAMPLE: <StatusBadge tone="green">Operational</StatusBadge>
+
+## Card
+import { Card } from '@uraniumtech/ui'
+Surface container: semantic bg/border, optional header row.
+REPLACES: `bg-[#27293d] rounded-lg shadow-lg` divs, any hand-rolled card.
+PROPS: title?; label? (small uppercase over title); headerContent? (right slot); live? (green glow, one per view); className?; children
+EXAMPLE: <Card title="Forward Curve" label="Numerco" headerContent={<SegmentedControl .../>}>…</Card>
+
+## PageHeader
+import { PageHeader } from '@uraniumtech/ui'
+h1 + optional kicker/description/actions row.
+REPLACES: hand-rolled page title blocks.
+PROPS: title; kicker?; description?; actions?
+EXAMPLE: <PageHeader title="Reactor Data" kicker="IAEA PRIS" actions={<Button>Export</Button>} />
+
+## StatCard
+import { StatCard } from '@uraniumtech/ui'
+KPI tile: mono tabular value, hexagon icon chip, sign-colored delta.
+REPLACES: any stat/KPI tile; the old StatsCard (its `color` prop was broken — accent uses a static class lookup).
+PROPS: value; label?; icon? (lucide component); accent?='green'|'teal'|'petrol'|'amber'|'rust'; delta?={value, format?}; footer?; live?
+EXAMPLE: <StatCard value="$82.50" label="Spot U3O8" icon={TrendingUp} accent="green" delta={{ value: 1.25 }} />
+
+## SegmentedControl
+import { SegmentedControl } from '@uraniumtech/ui'
+Filter toolbar (radiogroup + arrow keys).
+REPLACES: rows of filter <button>s with active/inactive class ternaries (MAX/5Y/1Y/1M/1W pattern).
+PROPS: options: (string | {value,label})[]; value; onChange; size?='sm'|'md'; ariaLabel (required)
+EXAMPLE: <SegmentedControl options={['MAX','5Y','1Y','1M','1W']} value={range} onChange={setRange} ariaLabel="Time range" />
+
+## Tabs
+import { Tabs } from '@uraniumtech/ui'
+Tablist with green active underline; children = active panel.
+REPLACES: hand-rolled tab bars.
+PROPS: tabs: {value,label}[]; value; onChange; ariaLabel; children?
+EXAMPLE: <Tabs tabs={[{value:'us',label:'US'},{value:'eu',label:'EU'}]} value={r} onChange={setR} ariaLabel="Region">{panel}</Tabs>
+
+## Tooltip
+import { Tooltip } from '@uraniumtech/ui'
+Hover/focus tooltip, no portal (works in Astro islands).
+REPLACES: title= attributes, hand-rolled hover popups.
+PROPS: content; side?='top'|'bottom'; children (single element)
+EXAMPLE: <Tooltip content="lbs U3O8 equivalent"><button>?</button></Tooltip>
+
+## DataTable
+import { DataTable } from '@uraniumtech/ui'
+Sortable table: sticky header, right-aligned mono numeric cells, empty state, a11y caption.
+REPLACES: ANY raw <table>/thead/tbody markup.
+PROPS: columns: {key, header, cell?, numeric?, sortable?, sortValue?, align?, width?}[];
+  rows: T[]; getRowKey; defaultSort?={key,dir}; stickyHeader?=true; density?='normal'|'compact';
+  onRowClick?; emptyState?; caption?
+EXAMPLE:
+  <DataTable rows={reactors} getRowKey={r => r.id} caption="Reactor list" columns={[
+    { key: 'name', header: 'Reactor', sortable: true },
+    { key: 'mwe', header: 'MWe', numeric: true, sortable: true },
+  ]} />
+
+## LineChart
+import { LineChart } from '@uraniumtech/ui'
+D3 line/area chart with brand axes, tooltip, HTML legend. x: string (point scale), number, or Date.
+REPLACES: any d3.select/append code, chart.js, hand-rolled svg charts.
+PROPS: series: {id, label?, data:{x,y}[], color? (palette token: petrol|sage|silver|isotope|amber|rust|glow|reactor), dashed?, area?}[];
+  height?=360; yFormat?; grid?=true; tooltip?=true; legend?=true;
+  zeroBaseline?=false (set true for volumes/totals; leave off for prices); ariaLabel (required)
+EXAMPLE:
+  <LineChart ariaLabel="U3O8 spot price" series={[
+    { id: 'spot', label: 'Spot', area: true, data: prices.map(p => ({ x: p.date, y: p.usd })) },
+    { id: 'fwd', label: 'Forward', color: 'sage', dashed: true, data: fwd },
+  ]} />
+
+## BarChart
+import { BarChart } from '@uraniumtech/ui'
+D3 bar chart; multiple series stack by default (stacked={false} groups them).
+REPLACES: any d3 bar code, hand-rolled svg bars.
+PROPS: series: {id, label?, color?, data:{category,value}[]}[]; stacked?=true; height?; yFormat?; legend?; tooltip?; ariaLabel (required)
+EXAMPLE:
+  <BarChart ariaLabel="Imports by origin" series={[
+    { id: 'ca', label: 'Canada', data: caRows },
+    { id: 'kz', label: 'Kazakhstan', data: kzRows },
+  ]} />
+
+## chartPalette / seriesColor
+import { chartPalette, seriesColor } from '@uraniumtech/ui'
+Brand chart colors keyed by token name. Use for any custom viz; never hardcode hex.
+
+## useMeasure
+import { useMeasure } from '@uraniumtech/ui'
+ResizeObserver width hook used by the charts; reuse for custom responsive components.

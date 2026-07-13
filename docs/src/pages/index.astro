@@ -1,0 +1,24 @@
+---
+// Gallery of every library component, light + dark. check-manifest.mjs verifies
+// each manifest component renders here (names live in Gallery.tsx sections):
+// Button, Kicker, Badge, StatusBadge, Card, PageHeader, StatCard,
+// SegmentedControl, Tabs, Tooltip, DataTable, LineChart, BarChart.
+import "../styles/docs.css";
+import { Gallery } from "../Gallery";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@uraniumtech/ui gallery</title>
+  </head>
+  <body>
+    <div id="light">
+      <Gallery client:load />
+    </div>
+    <div id="dark" data-theme="dark" class="bg-ut-bg">
+      <Gallery client:load />
+    </div>
+  </body>
+</html>

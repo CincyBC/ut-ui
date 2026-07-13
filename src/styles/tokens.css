@@ -1,0 +1,117 @@
+/*
+ * Uranium Technologies design tokens — the single source of truth.
+ * Consumers: @import "@uraniumtech/ui/tokens.css" next to @import "tailwindcss",
+ * and add  @source "../../node_modules/@uraniumtech/ui/src";  so Tailwind sees
+ * the library's class names.
+ *
+ * Light ("paper") is the default; set data-theme="dark" on <html> or <body>
+ * for the gunmetal control-room mode.
+ */
+
+@theme {
+  --color-ink: #22333f;
+  --color-petrol: #2d495e;
+  --color-petrol-light: #3e5f73;
+  --color-steel: #596670;
+  --color-silver: #9aa6a4;
+  --color-reactor: #4c7a5d;
+  --color-isotope: #537a77;
+  --color-glow: #a1c4a2;
+  --color-paper: #f6f6f4;
+  --color-gunmetal: #171e24;
+  --color-surface-dark: #1f2830;
+  --color-border-dark: #303c46;
+  --color-paper-text: #e8eae7;
+  --color-amber-alert: #c9a227;
+  --color-rust: #b0533f;
+
+  --font-display: "Barlow Semi Condensed", sans-serif;
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Semantic aliases must be inline so utilities emit var(--ut-*) directly and
+   re-resolve under any data-theme ancestor (not just :root). */
+@theme inline {
+  --color-ut-bg: var(--ut-bg);
+  --color-ut-surface: var(--ut-surface);
+  --color-ut-text: var(--ut-text);
+  --color-ut-muted: var(--ut-text-muted);
+  --color-ut-border: var(--ut-border);
+  --color-ut-accent: var(--ut-accent);
+}
+
+:root {
+  --ut-ink: #22333f;
+  --ut-petrol: #2d495e;
+  --ut-petrol-light: #3e5f73;
+  --ut-steel: #596670;
+  --ut-silver: #9aa6a4;
+  --ut-green: #4c7a5d;
+  --ut-teal: #537a77;
+  --ut-glow: #a1c4a2;
+  --ut-paper: #f6f6f4;
+  --ut-surface-light: #ffffff;
+  --ut-gunmetal: #171e24;
+  --ut-surface-dark: #1f2830;
+  --ut-border-dark: #303c46;
+  --ut-paper-text: #e8eae7;
+  --ut-warning: #c9a227;
+  --ut-danger: #b0533f;
+
+  /* semantic — light mode default */
+  --ut-bg: var(--ut-paper);
+  --ut-surface: var(--ut-surface-light);
+  --ut-text: var(--ut-ink);
+  --ut-text-muted: var(--ut-steel);
+  --ut-border: #dddfda;
+  --ut-accent: var(--ut-green);
+}
+
+[data-theme="dark"] {
+  --ut-bg: var(--ut-gunmetal);
+  --ut-surface: var(--ut-surface-dark);
+  --ut-text: var(--ut-paper-text);
+  --ut-text-muted: var(--ut-silver);
+  --ut-border: var(--ut-border-dark);
+  --ut-accent: var(--ut-glow);
+}
+
+body {
+  font-family: var(--font-sans, "Public Sans", system-ui, sans-serif);
+  margin: 0;
+  padding: 0;
+  background: var(--ut-bg);
+  color: var(--ut-text);
+}
+
+/* ---- brand utilities ---- */
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ut-accent);
+}
+.kicker::before,
+.kicker::after {
+  content: "";
+  height: 1px;
+  width: 2rem;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.hex-frame {
+  clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+}
+
+/* Live-signal glow: one per view, reserved for the "live" element */
+.ut-glow-live {
+  box-shadow: 0 0 12px rgba(161, 196, 162, 0.35);
+}

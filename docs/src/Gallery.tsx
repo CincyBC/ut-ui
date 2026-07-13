@@ -1,0 +1,214 @@
+import React, { useState } from "react";
+import {
+  Badge,
+  BarChart,
+  Button,
+  Card,
+  DataTable,
+  Kicker,
+  LineChart,
+  PageHeader,
+  SegmentedControl,
+  StatCard,
+  StatusBadge,
+  Tabs,
+  Tooltip,
+  type Column,
+} from "../../src";
+
+// Fixed-seed data so Playwright screenshots are deterministic.
+const PRICES = [78.5, 79.25, 81.0, 80.5, 82.75, 83.4, 82.5, 84.1, 85.0, 84.6, 86.2, 87.9];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const spotSeries = {
+  id: "spot",
+  label: "Spot",
+  area: true,
+  data: MONTHS.map((m, i) => ({ x: m, y: PRICES[i] })),
+};
+const forwardSeries = {
+  id: "fwd",
+  label: "Forward",
+  color: "sage" as const,
+  dashed: true,
+  data: MONTHS.map((m, i) => ({ x: m, y: PRICES[i] + 3.5 })),
+};
+const importSeries = [
+  {
+    id: "ca",
+    label: "Canada",
+    data: [
+      { category: "2022", value: 420 },
+      { category: "2023", value: 460 },
+      { category: "2024", value: 510 },
+    ],
+  },
+  {
+    id: "kz",
+    label: "Kazakhstan",
+    data: [
+      { category: "2022", value: 880 },
+      { category: "2023", value: 920 },
+      { category: "2024", value: 890 },
+    ],
+  },
+];
+
+interface Reactor {
+  id: string;
+  name: string;
+  country: string;
+  mwe: number;
+  status: string;
+}
+const REACTORS: Reactor[] = [
+  { id: "1", name: "Vogtle 3", country: "USA", mwe: 1117, status: "Operational" },
+  { id: "2", name: "Barakah 4", country: "UAE", mwe: 1345, status: "Operational" },
+  { id: "3", name: "Flamanville 3", country: "France", mwe: 1630, status: "Startup" },
+  { id: "4", name: "Kursk II-1", country: "Russia", mwe: 1175, status: "Construction" },
+];
+const reactorColumns: Column<Reactor>[] = [
+  { key: "name", header: "Reactor", sortable: true },
+  { key: "country", header: "Country", sortable: true },
+  { key: "mwe", header: "MWe", numeric: true, sortable: true },
+  {
+    key: "status",
+    header: "Status",
+    cell: (r) => (
+      <StatusBadge tone={r.status === "Operational" ? "green" : r.status === "Startup" ? "amber" : "neutral"}>
+        {r.status}
+      </StatusBadge>
+    ),
+  },
+];
+
+function Section({ name, children }: { name: string; children: React.ReactNode }) {
+  return (
+    <section className="mb-10" data-component={name}>
+      <h2 className="mb-3 font-display text-lg font-semibold uppercase tracking-wide text-ut-muted">{name}</h2>
+      {children}
+    </section>
+  );
+}
+
+export function Gallery() {
+  const [range, setRange] = useState<"MAX" | "5Y" | "1Y" | "1M" | "1W">("1Y");
+  const [region, setRegion] = useState<"us" | "eu">("us");
+
+  return (
+    <div className="mx-auto max-w-[1280px] px-6 py-10 text-ut-text">
+      <PageHeader
+        title="Component Gallery"
+        kicker="Uranium Technologies"
+        description="Every @uraniumtech/ui component, rendered from library source."
+      />
+
+      <Section name="Kicker">
+        <Kicker>Analytics</Kicker>
+      </Section>
+
+      <Section name="Button">
+        <div className="flex flex-wrap items-center gap-3">
+          <Button>Primary</Button>
+          <Button variant="accent">Accent</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button size="sm">Small</Button>
+          <Button disabled>Disabled</Button>
+        </div>
+      </Section>
+
+      <Section name="Badge">
+        <div className="flex flex-wrap items-center gap-3">
+          <Badge>Neutral</Badge>
+          <Badge tone="green">Green</Badge>
+          <Badge tone="teal">Teal</Badge>
+          <Badge tone="petrol">Petrol</Badge>
+          <Badge tone="amber">Amber</Badge>
+          <Badge tone="rust">Rust</Badge>
+          <StatusBadge tone="green">Operational</StatusBadge>
+          <StatusBadge tone="rust">Shutdown</StatusBadge>
+        </div>
+      </Section>
+
+      <Section name="SegmentedControl">
+        <SegmentedControl
+          options={["MAX", "5Y", "1Y", "1M", "1W"] as const}
+          value={range}
+          onChange={setRange}
+          ariaLabel="Time range"
+        />
+      </Section>
+
+      <Section name="Tabs">
+        <Tabs
+          tabs={[
+            { value: "us", label: "EIA (US)" },
+            { value: "eu", label: "ESA (EU)" },
+          ]}
+          value={region}
+          onChange={setRegion}
+          ariaLabel="Region"
+        >
+          {region === "us" ? "US utility purchase data." : "European supply agency data."}
+        </Tabs>
+      </Section>
+
+      <Section name="Tooltip">
+        <Tooltip content="pounds U3O8 equivalent">
+          <Button variant="ghost" size="sm">
+            Hover me
+          </Button>
+        </Tooltip>
+      </Section>
+
+      <Section name="StatCard">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <StatCard value="$87.90" label="Spot U3O8" accent="green" delta={{ value: 1.7 }} live />
+          <StatCard value="440" label="Operating reactors" accent="petrol" footer="IAEA PRIS" />
+          <StatCard value="-3.2%" label="Weekly change" accent="rust" delta={{ value: -3.2 }} />
+        </div>
+      </Section>
+
+      <Section name="Card">
+        <Card title="Forward Curve" label="Numerco" headerContent={<Badge tone="petrol">Daily</Badge>}>
+          Card body content.
+        </Card>
+      </Section>
+
+      <Section name="PageHeader">
+        <Card>
+          <PageHeader
+            title="Reactor Data"
+            kicker="IAEA PRIS"
+            description="Global fleet status and capacity."
+            actions={<Button size="sm">Export</Button>}
+            className="mb-0"
+          />
+        </Card>
+      </Section>
+
+      <Section name="DataTable">
+        <Card>
+          <DataTable
+            columns={reactorColumns}
+            rows={REACTORS}
+            getRowKey={(r) => r.id}
+            defaultSort={{ key: "mwe", dir: "desc" }}
+            caption="Reactor fleet"
+          />
+        </Card>
+      </Section>
+
+      <Section name="LineChart">
+        <Card title="U3O8 Price" label="USD/lb">
+          <LineChart series={[spotSeries, forwardSeries]} ariaLabel="U3O8 price, spot and forward" height={300} />
+        </Card>
+      </Section>
+
+      <Section name="BarChart">
+        <Card title="Imports by Origin" label="tU">
+          <BarChart series={importSeries} ariaLabel="Uranium imports by origin country" height={300} />
+        </Card>
+      </Section>
+    </div>
+  );
+}
