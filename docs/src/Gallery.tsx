@@ -1,19 +1,34 @@
 import React, { useState } from "react";
+import { DollarSign } from "lucide-react";
 import {
   Badge,
   BarChart,
   Button,
   Card,
+  Checkbox,
+  ConfirmDialog,
   DataTable,
+  Dropdown,
+  FormField,
+  Input,
   Kicker,
   LineChart,
+  Modal,
   PageHeader,
+  Radio,
   SegmentedControl,
+  Select,
+  Slider,
   StatCard,
   StatusBadge,
+  Switch,
   Tabs,
+  Tag,
+  TagInput,
   ThemeToggle,
+  ToastProvider,
   Tooltip,
+  useToast,
   type Column,
 } from "../../src";
 
@@ -91,11 +106,29 @@ function Section({ name, children }: { name: string; children: React.ReactNode }
   );
 }
 
+function ToastDemo() {
+  const { showToast } = useToast();
+  return (
+    <Button size="sm" onClick={() => showToast({ message: "Contract saved", tone: "success" })}>
+      Show toast
+    </Button>
+  );
+}
+
 export function Gallery() {
   const [range, setRange] = useState<"MAX" | "5Y" | "1Y" | "1M" | "1W">("1Y");
   const [region, setRegion] = useState<"us" | "eu">("us");
+  const [checked, setChecked] = useState(true);
+  const [kind, setKind] = useState<"utility" | "producer">("utility");
+  const [live, setLive] = useState(false);
+  const [material, setMaterial] = useState<"u3o8" | "swu">("u3o8");
+  const [discount, setDiscount] = useState(2.5);
+  const [tags, setTags] = useState(["U3O8", "SWU"]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   return (
+    <ToastProvider>
     <div className="mx-auto max-w-[1280px] px-6 py-10 text-ut-text">
       <PageHeader
         title="Component Gallery"
@@ -214,6 +247,92 @@ export function Gallery() {
           <BarChart series={importSeries} ariaLabel="Uranium imports by origin country" height={300} />
         </Card>
       </Section>
+
+      <Section name="FormField">
+        <div className="max-w-xs">
+          <FormField label="Price" htmlFor="gallery-price" hint="USD per pound">
+            <Input id="gallery-price" type="number" icon={<DollarSign size={14} />} />
+          </FormField>
+        </div>
+      </Section>
+
+      <Section name="Input">
+        <div className="flex max-w-xs flex-col gap-3">
+          <Input aria-label="Contract name" placeholder="Contract name" />
+          <Input aria-label="Quantity" type="number" placeholder="0" />
+        </div>
+      </Section>
+
+      <Section name="Select">
+        <div className="max-w-xs">
+          <Select
+            aria-label="Material"
+            options={[
+              { value: "u3o8", label: "U3O8" },
+              { value: "swu", label: "SWU" },
+            ]}
+            value={material}
+            onChange={setMaterial}
+          />
+        </div>
+      </Section>
+
+      <Section name="Checkbox / Radio / Switch">
+        <div className="flex flex-wrap items-center gap-6">
+          <Checkbox label="Delivered" checked={checked} onChange={setChecked} />
+          <Radio label="Utility" name="kind" value="utility" checked={kind === "utility"} onChange={(v) => setKind(v as typeof kind)} />
+          <Radio label="Producer" name="kind" value="producer" checked={kind === "producer"} onChange={(v) => setKind(v as typeof kind)} />
+          <Switch label="Live pricing" checked={live} onChange={setLive} />
+        </div>
+      </Section>
+
+      <Section name="Slider">
+        <div className="max-w-xs">
+          <Slider ariaLabel="Discount" min={0} max={10} step={0.5} value={discount} onChange={setDiscount} showValue />
+        </div>
+      </Section>
+
+      <Section name="Tag / TagInput">
+        <div className="max-w-sm">
+          <TagInput value={tags} onChange={setTags} ariaLabel="Materials" />
+        </div>
+      </Section>
+
+      <Section name="Dropdown">
+        <Dropdown
+          trigger={<Button size="sm">Actions</Button>}
+          items={[
+            { label: "Edit", onSelect: () => {} },
+            { label: "Delete", onSelect: () => {} },
+          ]}
+        />
+      </Section>
+
+      <Section name="Modal / ConfirmDialog">
+        <div className="flex gap-3">
+          <Button size="sm" onClick={() => setModalOpen(true)}>
+            Open modal
+          </Button>
+          <Button size="sm" variant="ghost" onClick={() => setConfirmOpen(true)}>
+            Open confirm dialog
+          </Button>
+        </div>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Edit contract">
+          <p className="text-sm text-ut-muted">Modal body content.</p>
+        </Modal>
+        <ConfirmDialog
+          open={confirmOpen}
+          onClose={() => setConfirmOpen(false)}
+          onConfirm={() => setConfirmOpen(false)}
+          title="Delete counterparty"
+          message="This cannot be undone."
+        />
+      </Section>
+
+      <Section name="Toast">
+        <ToastDemo />
+      </Section>
     </div>
+    </ToastProvider>
   );
 }

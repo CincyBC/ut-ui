@@ -114,6 +114,118 @@
       "replaces": ["d3 bar code", "hand-rolled svg bars"],
       "props": "series {id,label?,color?,data:{category,value}[]}[]; stacked?=true; height?; yFormat?; legend?; tooltip?; ariaLabel (required)",
       "example": "<BarChart ariaLabel=\"Imports\" series={[{id:'ca',data:rows}]} />"
+    },
+    {
+      "name": "FormField",
+      "import": "import { FormField } from '@uraniumtech/ui'",
+      "source": "src/components/FormField.tsx",
+      "replaces": ["hand-rolled label/error/hint markup around form controls"],
+      "props": "label; htmlFor; hint?; error?; children (single control); className?",
+      "example": "<FormField label=\"Quantity\" htmlFor=\"qty\" hint=\"In pounds U3O8\"><Input id=\"qty\" /></FormField>"
+    },
+    {
+      "name": "Input",
+      "import": "import { Input } from '@uraniumtech/ui'",
+      "source": "src/components/Input.tsx",
+      "replaces": ["hand-styled <input>", "ad-hoc numeric formatting"],
+      "props": "icon?; ...native input props",
+      "example": "<Input type=\"number\" aria-label=\"Price\" />"
+    },
+    {
+      "name": "Select",
+      "import": "import { Select } from '@uraniumtech/ui'",
+      "source": "src/components/Select.tsx",
+      "replaces": ["hand-styled <select>", "custom listbox re-implementations"],
+      "props": "options {value,label}[]; value; onChange; ...native select props",
+      "example": "<Select options={[{value:'u3o8',label:'U3O8'}]} value={m} onChange={setM} aria-label=\"Material\" />"
+    },
+    {
+      "name": "Checkbox",
+      "import": "import { Checkbox } from '@uraniumtech/ui'",
+      "source": "src/components/Checkbox.tsx",
+      "replaces": ["raw <input type=\"checkbox\">"],
+      "props": "label; checked; onChange; disabled?",
+      "example": "<Checkbox label=\"Delivered\" checked={d} onChange={setD} />"
+    },
+    {
+      "name": "Radio",
+      "import": "import { Radio } from '@uraniumtech/ui'",
+      "source": "src/components/Checkbox.tsx",
+      "replaces": ["raw <input type=\"radio\">"],
+      "props": "label; name; value; checked; onChange; disabled?",
+      "example": "<Radio label=\"Utility\" name=\"kind\" value=\"utility\" checked={k==='utility'} onChange={setK} />"
+    },
+    {
+      "name": "Switch",
+      "import": "import { Switch } from '@uraniumtech/ui'",
+      "source": "src/components/Checkbox.tsx",
+      "replaces": ["hand-rolled toggle switches"],
+      "props": "label; checked; onChange; disabled?",
+      "example": "<Switch label=\"Live pricing\" checked={live} onChange={setLive} />"
+    },
+    {
+      "name": "Modal",
+      "import": "import { Modal } from '@uraniumtech/ui'",
+      "source": "src/components/Modal.tsx",
+      "replaces": ["SweetAlert", "hand-rolled modal overlays"],
+      "props": "open; onClose; title; children; className?",
+      "example": "<Modal open={open} onClose={close} title=\"Edit contract\">…</Modal>"
+    },
+    {
+      "name": "ConfirmDialog",
+      "import": "import { ConfirmDialog } from '@uraniumtech/ui'",
+      "source": "src/components/Modal.tsx",
+      "replaces": ["window.confirm", "SweetAlert confirm dialogs"],
+      "props": "open; onClose; onConfirm; title; message; confirmLabel?; cancelLabel?",
+      "example": "<ConfirmDialog open={open} onClose={close} onConfirm={remove} title=\"Delete\" message=\"This cannot be undone.\" />"
+    },
+    {
+      "name": "ToastProvider",
+      "import": "import { ToastProvider } from '@uraniumtech/ui'",
+      "source": "src/components/Toast.tsx",
+      "replaces": ["SweetAlert/Notifications-style toasts"],
+      "props": "children",
+      "example": "<ToastProvider><App /></ToastProvider>"
+    },
+    {
+      "name": "useToast",
+      "import": "import { useToast } from '@uraniumtech/ui'",
+      "source": "src/components/Toast.tsx",
+      "replaces": ["hand-rolled snackbars"],
+      "props": "() => { showToast({message, tone?, durationMs?}) }",
+      "example": "const { showToast } = useToast(); showToast({ message: 'Saved', tone: 'success' });"
+    },
+    {
+      "name": "Dropdown",
+      "import": "import { Dropdown } from '@uraniumtech/ui'",
+      "source": "src/components/Dropdown.tsx",
+      "replaces": ["hand-rolled popover menus"],
+      "props": "trigger (single element); items {label,onSelect,disabled?}[]; align?='start'|'end'",
+      "example": "<Dropdown trigger={<Button size=\"sm\">Actions</Button>} items={[{label:'Edit',onSelect:edit}]} />"
+    },
+    {
+      "name": "Tag",
+      "import": "import { Tag } from '@uraniumtech/ui'",
+      "source": "src/components/Tag.tsx",
+      "replaces": ["hand-rolled removable chips"],
+      "props": "label; onRemove?; className?",
+      "example": "<Tag label=\"Utility\" onRemove={remove} />"
+    },
+    {
+      "name": "TagInput",
+      "import": "import { TagInput } from '@uraniumtech/ui'",
+      "source": "src/components/Tag.tsx",
+      "replaces": ["third-party tag-input libraries"],
+      "props": "value: string[]; onChange; ariaLabel?; placeholder?",
+      "example": "<TagInput value={materials} onChange={setMaterials} ariaLabel=\"Materials\" />"
+    },
+    {
+      "name": "Slider",
+      "import": "import { Slider } from '@uraniumtech/ui'",
+      "source": "src/components/Slider.tsx",
+      "replaces": ["nouislider", "hand-rolled draggable sliders"],
+      "props": "min; max; value; onChange; step?=1; ariaLabel (required); showValue?",
+      "example": "<Slider ariaLabel=\"Discount\" min={0} max={10} value={d} onChange={setD} showValue />"
     }
   ]
 }

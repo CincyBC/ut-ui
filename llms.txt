@@ -133,3 +133,72 @@ Brand chart colors keyed by token name. Use for any custom viz; never hardcode h
 ## useMeasure
 import { useMeasure } from '@uraniumtech/ui'
 ResizeObserver width hook used by the charts; reuse for custom responsive components.
+
+## FormField
+import { FormField } from '@uraniumtech/ui'
+Label + hint/error wrapper around a single control. Clones its child to set aria-invalid.
+REPLACES: hand-rolled label/error/hint markup around form controls.
+PROPS: label; htmlFor; hint?; error?; children (single control element); className?
+EXAMPLE: <FormField label="Quantity" htmlFor="qty" hint="In pounds U3O8"><Input id="qty" type="number" /></FormField>
+
+## Input
+import { Input } from '@uraniumtech/ui'
+Text/number/email input. Numeric types render tabular mono digits. Pair with FormField.
+REPLACES: hand-styled <input>, ad-hoc numeric formatting.
+PROPS: icon? (leading icon slot); ...native input props
+EXAMPLE: <Input type="number" icon={<DollarSign size={14} />} aria-label="Price" />
+
+## Select
+import { Select } from '@uraniumtech/ui'
+Native <select>, brand-styled, with a chevron affordance.
+REPLACES: hand-styled <select>, custom listbox re-implementations for simple option lists.
+PROPS: options: {value,label}[]; value; onChange; ...native select props
+EXAMPLE: <Select options={[{value:'u3o8',label:'U3O8'}]} value={m} onChange={setM} aria-label="Material" />
+
+## Checkbox / Radio / Switch
+import { Checkbox, Radio, Switch } from '@uraniumtech/ui'
+Custom-styled checkbox, radio, and toggle switch (role="switch"), each label-wrapped.
+REPLACES: raw <input type="checkbox"/radio">, hand-rolled toggle switches.
+PROPS Checkbox: label; checked; onChange; disabled?
+PROPS Radio: label; name; value; checked; onChange; disabled?
+PROPS Switch: label; checked; onChange; disabled?
+EXAMPLE: <Switch label="Live pricing" checked={live} onChange={setLive} />
+
+## Modal / ConfirmDialog
+import { Modal, ConfirmDialog } from '@uraniumtech/ui'
+Focus-trapped, Escape/backdrop-to-close dialog via portal. ConfirmDialog is a preset for
+destructive-action confirmation (Cancel/Confirm buttons).
+REPLACES: SweetAlert, hand-rolled modal overlays, window.confirm.
+PROPS Modal: open; onClose; title; children; className?
+PROPS ConfirmDialog: open; onClose; onConfirm; title; message; confirmLabel?; cancelLabel?
+EXAMPLE: <ConfirmDialog open={open} onClose={close} onConfirm={remove} title="Delete counterparty" message="This cannot be undone." />
+
+## Toast / useToast
+import { ToastProvider, useToast } from '@uraniumtech/ui'
+Wrap the app once in <ToastProvider>; call showToast({message, tone?, durationMs?}) from useToast().
+Renders a role="status" live region, auto-dismisses (default 4000ms).
+REPLACES: SweetAlert/Notifications-style toasts, hand-rolled snackbars.
+PROPS ToastInput: message; tone?='info'|'success'|'error'; durationMs?=4000
+EXAMPLE: const { showToast } = useToast(); showToast({ message: "Contract saved", tone: "success" });
+
+## Dropdown
+import { Dropdown } from '@uraniumtech/ui'
+Keyboard-navigable action menu anchored to a trigger element (row actions, user menu).
+REPLACES: hand-rolled popover menus, ad-hoc absolutely-positioned action lists.
+PROPS: trigger (single element); items: {label, onSelect, disabled?}[]; align?='start'|'end'
+EXAMPLE: <Dropdown trigger={<Button size="sm">Actions</Button>} items={[{label:'Edit',onSelect:edit},{label:'Delete',onSelect:remove}]} />
+
+## Tag / TagInput
+import { Tag, TagInput } from '@uraniumtech/ui'
+Tag is the only pill-shaped element allowed by brand rules. TagInput is a type-and-Enter editor.
+REPLACES: hand-rolled removable chips, third-party tag-input libraries.
+PROPS Tag: label; onRemove?; className?
+PROPS TagInput: value: string[]; onChange; ariaLabel?; placeholder?
+EXAMPLE: <TagInput value={materials} onChange={setMaterials} ariaLabel="Materials" />
+
+## Slider
+import { Slider } from '@uraniumtech/ui'
+Single-thumb range slider (native <input type="range"> under the hood).
+REPLACES: nouislider or other range-slider libraries, hand-rolled draggable sliders.
+PROPS: min; max; value; onChange; step?=1; ariaLabel (required); showValue?
+EXAMPLE: <Slider ariaLabel="Discount" min={0} max={10} step={0.5} value={discount} onChange={setDiscount} showValue />
