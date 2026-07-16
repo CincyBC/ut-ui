@@ -210,3 +210,39 @@ Prev/Next pager for use below DataTable. Renders nothing when pageCount<=1. Slic
 REPLACES: hand-rolled page-number button rows.
 PROPS: page; pageCount; onPageChange; className?
 EXAMPLE: <Pagination page={page} pageCount={Math.ceil(rows.length/pageSize)} onPageChange={setPage} />
+
+## Stepper
+import { Stepper } from '@uraniumtech/ui'
+Horizontal step indicator with hexagon markers (brand motif); completed/current/upcoming states.
+REPLACES: hand-rolled wizard progress bars.
+PROPS: steps: {label}[]; currentIndex; className?
+EXAMPLE: <Stepper steps={[{label:'Counterparty'},{label:'Terms'},{label:'Review'}]} currentIndex={1} />
+
+## Timeline
+import { Timeline } from '@uraniumtech/ui'
+Vertical activity feed: hexagon nodes on a hairline rail, mono timestamp, optional description.
+REPLACES: hand-rolled activity/audit-log feeds.
+PROPS: items: {id, title, timestamp, description?}[]; className?
+EXAMPLE: <Timeline items={[{id:'1',title:'Call logged',timestamp:'2026-07-10'}]} />
+
+## Avatar
+import { Avatar } from '@uraniumtech/ui'
+Hexagonal-framed avatar; renders an <img> when src is given, else initials from name.
+REPLACES: hand-rolled circular avatar divs.
+PROPS: name (required, used for initials/alt text); src?; size?='sm'|'md'|'lg'; className?
+EXAMPLE: <Avatar name="Bryan Corder" size="sm" />
+
+## DatePicker
+import { DatePicker } from '@uraniumtech/ui'
+Styled native <input type="date">, mono tabular digits. v1 scope — swap for a month-popover
+build if a project needs one; shares date math with Calendar.
+REPLACES: hand-styled <input type="date">, third-party date-picker libraries for simple cases.
+PROPS: value (ISO date string); onChange; ariaLabel (required); min?; max?; className?
+EXAMPLE: <DatePicker ariaLabel="Delivery date" value={date} onChange={setDate} />
+
+## Calendar
+import { Calendar } from '@uraniumtech/ui'
+Month-grid calendar. Caller controls the displayed month (onNavigate) and owns event data.
+REPLACES: FullCalendar and similar third-party calendar libraries for a simple month view.
+PROPS: year; month (1-12); events: {date (ISO), label}[]; onNavigate: (dir:'prev'|'next')=>void; onDateClick?; className?
+EXAMPLE: <Calendar year={2026} month={7} events={deliveries} onNavigate={nav} onDateClick={openDay} />

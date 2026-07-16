@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { DollarSign } from "lucide-react";
 import {
+  Avatar,
   Badge,
   BarChart,
   Button,
+  Calendar,
   Card,
   Checkbox,
   ConfirmDialog,
   DataTable,
+  DatePicker,
   Dropdown,
   FormField,
   Input,
@@ -22,11 +25,13 @@ import {
   Slider,
   StatCard,
   StatusBadge,
+  Stepper,
   Switch,
   Tabs,
   Tag,
   TagInput,
   ThemeToggle,
+  Timeline,
   ToastProvider,
   Tooltip,
   useToast,
@@ -128,6 +133,9 @@ export function Gallery() {
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [page, setPage] = useState(2);
+  const [stepIndex, setStepIndex] = useState(1);
+  const [date, setDate] = useState("2026-07-15");
+  const [calMonth, setCalMonth] = useState({ year: 2026, month: 7 });
 
   return (
     <ToastProvider>
@@ -337,6 +345,60 @@ export function Gallery() {
 
       <Section name="Pagination">
         <Pagination page={page} pageCount={5} onPageChange={setPage} />
+      </Section>
+
+      <Section name="Stepper">
+        <Stepper
+          steps={[{ label: "Counterparty" }, { label: "Terms" }, { label: "Delivery" }, { label: "Review" }]}
+          currentIndex={stepIndex}
+        />
+        <div className="mt-3 flex gap-2">
+          <Button size="sm" variant="ghost" onClick={() => setStepIndex((i) => Math.max(0, i - 1))}>
+            Back
+          </Button>
+          <Button size="sm" onClick={() => setStepIndex((i) => Math.min(3, i + 1))}>
+            Next
+          </Button>
+        </div>
+      </Section>
+
+      <Section name="Timeline">
+        <Timeline
+          items={[
+            { id: "1", title: "Quarterly review call", timestamp: "2026-07-10", description: "Discussed Q3 pricing." },
+            { id: "2", title: "Contract ct-3 opened", timestamp: "2026-06-20" },
+          ]}
+        />
+      </Section>
+
+      <Section name="Avatar">
+        <div className="flex items-center gap-3">
+          <Avatar name="Bryan Corder" size="sm" />
+          <Avatar name="Bryan Corder" size="md" />
+          <Avatar name="Bryan Corder" size="lg" />
+        </div>
+      </Section>
+
+      <Section name="DatePicker">
+        <div className="max-w-xs">
+          <DatePicker ariaLabel="Delivery date" value={date} onChange={setDate} />
+        </div>
+      </Section>
+
+      <Section name="Calendar">
+        <Card>
+          <Calendar
+            year={calMonth.year}
+            month={calMonth.month}
+            events={[{ date: "2026-07-15", label: "U3O8 delivery" }]}
+            onNavigate={(dir) =>
+              setCalMonth(({ year, month }) => {
+                const next = dir === "next" ? month + 1 : month - 1;
+                return next > 12 ? { year: year + 1, month: 1 } : next < 1 ? { year: year - 1, month: 12 } : { year, month: next };
+              })
+            }
+          />
+        </Card>
       </Section>
     </div>
     </ToastProvider>

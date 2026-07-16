@@ -234,6 +234,46 @@
       "replaces": ["hand-rolled page-number button rows"],
       "props": "page; pageCount; onPageChange; className?",
       "example": "<Pagination page={page} pageCount={pageCount} onPageChange={setPage} />"
+    },
+    {
+      "name": "Stepper",
+      "import": "import { Stepper } from '@uraniumtech/ui'",
+      "source": "src/components/Stepper.tsx",
+      "replaces": ["hand-rolled wizard progress bars"],
+      "props": "steps {label}[]; currentIndex; className?",
+      "example": "<Stepper steps={[{label:'Counterparty'},{label:'Terms'}]} currentIndex={1} />"
+    },
+    {
+      "name": "Timeline",
+      "import": "import { Timeline } from '@uraniumtech/ui'",
+      "source": "src/components/Timeline.tsx",
+      "replaces": ["hand-rolled activity/audit-log feeds"],
+      "props": "items {id,title,timestamp,description?}[]; className?",
+      "example": "<Timeline items={[{id:'1',title:'Call logged',timestamp:'2026-07-10'}]} />"
+    },
+    {
+      "name": "Avatar",
+      "import": "import { Avatar } from '@uraniumtech/ui'",
+      "source": "src/components/Avatar.tsx",
+      "replaces": ["hand-rolled circular avatar divs"],
+      "props": "name (required); src?; size?='sm'|'md'|'lg'; className?",
+      "example": "<Avatar name=\"Bryan Corder\" size=\"sm\" />"
+    },
+    {
+      "name": "DatePicker",
+      "import": "import { DatePicker } from '@uraniumtech/ui'",
+      "source": "src/components/DatePicker.tsx",
+      "replaces": ["hand-styled <input type=\"date\">", "third-party date pickers for simple cases"],
+      "props": "value (ISO date); onChange; ariaLabel (required); min?; max?; className?",
+      "example": "<DatePicker ariaLabel=\"Delivery date\" value={date} onChange={setDate} />"
+    },
+    {
+      "name": "Calendar",
+      "import": "import { Calendar } from '@uraniumtech/ui'",
+      "source": "src/components/Calendar.tsx",
+      "replaces": ["FullCalendar and similar libraries for a simple month view"],
+      "props": "year; month (1-12); events {date,label}[]; onNavigate; onDateClick?; className?",
+      "example": "<Calendar year={2026} month={7} events={events} onNavigate={nav} />"
     }
   ]
 }

@@ -23,3 +23,8 @@ export { Dropdown, type DropdownProps, type DropdownItem } from "./components/Dr
 export { Tag, TagInput, type TagProps, type TagInputProps } from "./components/Tag";
 export { Slider, type SliderProps } from "./components/Slider";
 export { Pagination, type PaginationProps } from "./components/Pagination";
+export { Stepper, type StepperProps, type StepperStep } from "./components/Stepper";
+export { Timeline, type TimelineProps, type TimelineItem } from "./components/Timeline";
+export { Avatar, type AvatarProps } from "./components/Avatar";
+export { DatePicker, type DatePickerProps } from "./components/DatePicker";
+export { Calendar, type CalendarProps, type CalendarEvent } from "./components/Calendar";
