@@ -226,6 +226,14 @@
       "replaces": ["nouislider", "hand-rolled draggable sliders"],
       "props": "min; max; value; onChange; step?=1; ariaLabel (required); showValue?",
       "example": "<Slider ariaLabel=\"Discount\" min={0} max={10} value={d} onChange={setD} showValue />"
+    },
+    {
+      "name": "Pagination",
+      "import": "import { Pagination } from '@uraniumtech/ui'",
+      "source": "src/components/Pagination.tsx",
+      "replaces": ["hand-rolled page-number button rows"],
+      "props": "page; pageCount; onPageChange; className?",
+      "example": "<Pagination page={page} pageCount={pageCount} onPageChange={setPage} />"
     }
   ]
 }

@@ -15,6 +15,7 @@ import {
   LineChart,
   Modal,
   PageHeader,
+  Pagination,
   Radio,
   SegmentedControl,
   Select,
@@ -126,6 +127,7 @@ export function Gallery() {
   const [tags, setTags] = useState(["U3O8", "SWU"]);
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [page, setPage] = useState(2);
 
   return (
     <ToastProvider>
@@ -331,6 +333,10 @@ export function Gallery() {
 
       <Section name="Toast">
         <ToastDemo />
+      </Section>
+
+      <Section name="Pagination">
+        <Pagination page={page} pageCount={5} onPageChange={setPage} />
       </Section>
     </div>
     </ToastProvider>

@@ -202,3 +202,11 @@ Single-thumb range slider (native <input type="range"> under the hood).
 REPLACES: nouislider or other range-slider libraries, hand-rolled draggable sliders.
 PROPS: min; max; value; onChange; step?=1; ariaLabel (required); showValue?
 EXAMPLE: <Slider ariaLabel="Discount" min={0} max={10} step={0.5} value={discount} onChange={setDiscount} showValue />
+
+## Pagination
+import { Pagination } from '@uraniumtech/ui'
+Prev/Next pager for use below DataTable. Renders nothing when pageCount<=1. Slice
+`rows` by page yourself and pass the slice to DataTable — Pagination doesn't own the data.
+REPLACES: hand-rolled page-number button rows.
+PROPS: page; pageCount; onPageChange; className?
+EXAMPLE: <Pagination page={page} pageCount={Math.ceil(rows.length/pageSize)} onPageChange={setPage} />

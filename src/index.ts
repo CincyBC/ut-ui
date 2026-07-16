@@ -22,3 +22,4 @@ export { ToastProvider, useToast, type ToastInput, type ToastTone } from "./comp
 export { Dropdown, type DropdownProps, type DropdownItem } from "./components/Dropdown";
 export { Tag, TagInput, type TagProps, type TagInputProps } from "./components/Tag";
 export { Slider, type SliderProps } from "./components/Slider";
+export { Pagination, type PaginationProps } from "./components/Pagination";
