@@ -12,7 +12,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => readFileSync(join(root, p), "utf8");
 
 // Non-component exports that don't need manifest entries.
-const EXEMPT = new Set(["chartPalette", "seriesOrder", "seriesColor", "useMeasure", "cn"]);
+const EXEMPT = new Set(["chartPalette", "seriesOrder", "seriesColor", "useMeasure", "cn", "themeInitScript", "THEME_STORAGE_KEY"]);
 
 const indexSrc = read("src/index.ts");
 const exported = [...indexSrc.matchAll(/export \{ ([^}]+) \} from "(\.[^"]+)"/g)].flatMap(([, names, from]) =>

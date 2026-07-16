@@ -84,6 +84,14 @@
       "example": "<Tooltip content=\"lbs U3O8\"><button>?</button></Tooltip>"
     },
     {
+      "name": "ThemeToggle",
+      "import": "import { ThemeToggle, themeInitScript } from '@uraniumtech/ui'",
+      "source": "src/components/ThemeToggle.tsx",
+      "replaces": ["hand-rolled light/dark switches", "manual data-theme toggling"],
+      "props": "className?",
+      "example": "<ThemeToggle />"
+    },
+    {
       "name": "DataTable",
       "import": "import { DataTable } from '@uraniumtech/ui'",
       "source": "src/components/DataTable.tsx",

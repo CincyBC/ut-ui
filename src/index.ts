@@ -7,6 +7,7 @@ export { StatCard, type StatCardProps, type StatAccent, type StatDelta } from ".
 export { SegmentedControl, type SegmentedControlProps } from "./components/SegmentedControl";
 export { Tabs, type TabsProps, type Tab } from "./components/Tabs";
 export { Tooltip, type TooltipProps } from "./components/Tooltip";
+export { ThemeToggle, themeInitScript, THEME_STORAGE_KEY, type ThemeToggleProps, type ThemeMode } from "./components/ThemeToggle";
 export { DataTable, type DataTableProps, type Column } from "./components/DataTable";
 export { LineChart, type LineChartProps, type LineSeries, type XValue } from "./charts/LineChart";
 export { BarChart, type BarChartProps, type BarSeries } from "./charts/BarChart";

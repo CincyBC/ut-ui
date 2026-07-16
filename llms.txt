@@ -78,6 +78,17 @@ REPLACES: title= attributes, hand-rolled hover popups.
 PROPS: content; side?='top'|'bottom'; children (single element)
 EXAMPLE: <Tooltip content="lbs U3O8 equivalent"><button>?</button></Tooltip>
 
+## ThemeToggle
+import { ThemeToggle, themeInitScript } from '@uraniumtech/ui'
+Light/dark/system 3-way switch (radiogroup). Persists to localStorage under "ut-theme",
+resolves "system" against prefers-color-scheme and follows OS changes live. Sets
+data-theme="light"|"dark" on <html>.
+REPLACES: hand-rolled theme switches, manual data-theme toggling.
+PROPS: className?
+EXAMPLE: <ThemeToggle />
+To avoid a flash of the wrong theme, inline `themeInitScript` in the document <head>
+before any stylesheet/hydration, e.g. in Astro: <script is:inline set:html={themeInitScript} />
+
 ## DataTable
 import { DataTable } from '@uraniumtech/ui'
 Sortable table: sticky header, right-aligned mono numeric cells, empty state, a11y caption.

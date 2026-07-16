@@ -12,6 +12,7 @@ import {
   StatCard,
   StatusBadge,
   Tabs,
+  ThemeToggle,
   Tooltip,
   type Column,
 } from "../../src";
@@ -158,6 +159,10 @@ export function Gallery() {
             Hover me
           </Button>
         </Tooltip>
+      </Section>
+
+      <Section name="ThemeToggle">
+        <ThemeToggle />
       </Section>
 
       <Section name="StatCard">
