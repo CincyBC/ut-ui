@@ -1,6 +1,7 @@
 import { cn } from "../cn";
 
 export interface DatePickerProps {
+  id?: string;
   value: string;
   onChange: (value: string) => void;
   ariaLabel: string;
@@ -10,9 +11,10 @@ export interface DatePickerProps {
 }
 
 /** Styled native <input type="date">. Swap for a custom month popover if scope grows. */
-export function DatePicker({ value, onChange, ariaLabel, min, max, className }: DatePickerProps) {
+export function DatePicker({ id, value, onChange, ariaLabel, min, max, className }: DatePickerProps) {
   return (
     <input
+      id={id}
       type="date"
       aria-label={ariaLabel}
       value={value}

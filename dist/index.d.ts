@@ -428,6 +428,7 @@ interface AvatarProps {
 declare function Avatar({ name, src, size, className }: AvatarProps): React.JSX.Element;
 
 interface DatePickerProps {
+    id?: string;
     value: string;
     onChange: (value: string) => void;
     ariaLabel: string;
@@ -436,7 +437,7 @@ interface DatePickerProps {
     className?: string;
 }
 /** Styled native <input type="date">. Swap for a custom month popover if scope grows. */
-declare function DatePicker({ value, onChange, ariaLabel, min, max, className }: DatePickerProps): React.JSX.Element;
+declare function DatePicker({ id, value, onChange, ariaLabel, min, max, className }: DatePickerProps): React.JSX.Element;
 
 interface CalendarEvent {
     date: string;

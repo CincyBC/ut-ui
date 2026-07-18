@@ -1330,10 +1330,11 @@ function Avatar({ name, src, size = "md", className }) {
 
 // src/components/DatePicker.tsx
 import { jsx as jsx27 } from "react/jsx-runtime";
-function DatePicker({ value, onChange, ariaLabel, min: min2, max: max2, className }) {
+function DatePicker({ id, value, onChange, ariaLabel, min: min2, max: max2, className }) {
   return /* @__PURE__ */ jsx27(
     "input",
     {
+      id,
       type: "date",
       "aria-label": ariaLabel,
       value,
