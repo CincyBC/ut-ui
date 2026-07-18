@@ -22,7 +22,7 @@ export function Select<V extends string>({ options, value, onChange, className, 
         onChange={(e) => onChange(e.target.value as V)}
         className={cn(
           "w-full appearance-none rounded border border-ut-border bg-ut-surface px-3 py-2 pr-9 text-sm text-ut-text",
-          "focus:outline-none focus:ring-1 focus:ring-ut-accent",
+          "focus:outline-none focus-visible:ring-1 focus-visible:ring-ut-accent",
           "aria-[invalid=true]:border-rust",
           className,
         )}

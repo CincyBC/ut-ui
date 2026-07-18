@@ -21,7 +21,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
         type={type}
         className={cn(
           "w-full rounded border border-ut-border bg-ut-surface px-3 py-2 text-sm text-ut-text placeholder:text-ut-muted",
-          "focus:outline-none focus:ring-1 focus:ring-ut-accent",
+          "focus:outline-none focus-visible:ring-1 focus-visible:ring-ut-accent",
           "aria-[invalid=true]:border-rust",
           isNumeric && "font-mono tabular-nums",
           Boolean(icon) && "pl-9",

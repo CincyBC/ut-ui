@@ -70,7 +70,7 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
         aria-labelledby={titleId}
         tabIndex={-1}
         className={cn(
-          "relative z-10 w-full max-w-md rounded-md border border-ut-border bg-ut-surface p-6 text-ut-text shadow-lg focus:outline-none",
+          "relative z-10 max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto overscroll-contain rounded-md border border-ut-border bg-ut-surface p-6 text-ut-text shadow-lg focus:outline-none",
           className,
         )}
       >
@@ -82,7 +82,7 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="text-ut-muted transition-colors hover:text-ut-text"
+            className="rounded text-ut-muted transition-colors hover:text-ut-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent"
           >
             <X size={18} />
           </button>

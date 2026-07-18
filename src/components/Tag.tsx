@@ -66,7 +66,7 @@ export function TagInput({ value, onChange, ariaLabel = "Tags", placeholder = "A
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center gap-1.5 rounded border border-ut-border bg-ut-surface p-1.5",
+        "flex flex-wrap items-center gap-1.5 rounded border border-ut-border bg-ut-surface p-1.5 focus-within:ring-1 focus-within:ring-ut-accent",
         className,
       )}
     >

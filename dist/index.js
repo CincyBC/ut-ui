@@ -745,7 +745,7 @@ var Input = React9.forwardRef(function Input2({ icon, type, className, ...props 
         type,
         className: cn(
           "w-full rounded border border-ut-border bg-ut-surface px-3 py-2 text-sm text-ut-text placeholder:text-ut-muted",
-          "focus:outline-none focus:ring-1 focus:ring-ut-accent",
+          "focus:outline-none focus-visible:ring-1 focus-visible:ring-ut-accent",
           "aria-[invalid=true]:border-rust",
           isNumeric && "font-mono tabular-nums",
           Boolean(icon) && "pl-9",
@@ -769,7 +769,7 @@ function Select({ options, value, onChange, className, ...props }) {
         onChange: (e) => onChange(e.target.value),
         className: cn(
           "w-full appearance-none rounded border border-ut-border bg-ut-surface px-3 py-2 pr-9 text-sm text-ut-text",
-          "focus:outline-none focus:ring-1 focus:ring-ut-accent",
+          "focus:outline-none focus-visible:ring-1 focus-visible:ring-ut-accent",
           "aria-[invalid=true]:border-rust",
           className
         ),
@@ -931,7 +931,7 @@ function Modal({ open, onClose, title, children, className }) {
           "aria-labelledby": titleId,
           tabIndex: -1,
           className: cn(
-            "relative z-10 w-full max-w-md rounded-md border border-ut-border bg-ut-surface p-6 text-ut-text shadow-lg focus:outline-none",
+            "relative z-10 max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto overscroll-contain rounded-md border border-ut-border bg-ut-surface p-6 text-ut-text shadow-lg focus:outline-none",
             className
           ),
           children: [
@@ -943,7 +943,7 @@ function Modal({ open, onClose, title, children, className }) {
                   type: "button",
                   onClick: onClose,
                   "aria-label": "Close",
-                  className: "text-ut-muted transition-colors hover:text-ut-text",
+                  className: "rounded text-ut-muted transition-colors hover:text-ut-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ut-accent",
                   children: /* @__PURE__ */ jsx18(X, { size: 18 })
                 }
               )
@@ -1180,7 +1180,7 @@ function TagInput({ value, onChange, ariaLabel = "Tags", placeholder = "Add\u202
     "div",
     {
       className: cn(
-        "flex flex-wrap items-center gap-1.5 rounded border border-ut-border bg-ut-surface p-1.5",
+        "flex flex-wrap items-center gap-1.5 rounded border border-ut-border bg-ut-surface p-1.5 focus-within:ring-1 focus-within:ring-ut-accent",
         className
       ),
       children: [
@@ -1342,7 +1342,7 @@ function DatePicker({ value, onChange, ariaLabel, min: min2, max: max2, classNam
       onChange: (e) => onChange(e.target.value),
       className: cn(
         "w-full rounded border border-ut-border bg-ut-surface px-3 py-2 font-mono text-sm tabular-nums text-ut-text",
-        "focus:outline-none focus:ring-1 focus:ring-ut-accent",
+        "focus:outline-none focus-visible:ring-1 focus-visible:ring-ut-accent",
         "aria-[invalid=true]:border-rust",
         className
       )
