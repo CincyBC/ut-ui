@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import * as d3 from "d3";
+import * as d3 from "./d3";
 import { chartChrome, seriesColor, type PaletteKey } from "./theme";
 import { useMeasure } from "./useMeasure";
 import { cn } from "../cn";

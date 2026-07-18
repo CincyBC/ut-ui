@@ -31,4 +31,4 @@ A component is not done until ALL FOUR exist — `scripts/check-manifest.mjs` fa
 
 ## Releasing
 
-Bump `version` in package.json, commit, `git tag vX.Y.Z`, push with tags. Consumers pin `github:cincybc/ut-ui#vX.Y.Z` and get `dist/` via the `prepare` script on install.
+`dist/` is checked into git (there is no `prepare` script — consumers install the git dep without building or pulling devDependencies). To release: run `npm run build`, bump `version` in package.json, commit **including `dist/`**, `git tag vX.Y.Z`, push with tags. Consumers pin `github:cincybc/ut-ui#vX.Y.Z`.

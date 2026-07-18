@@ -3,6 +3,8 @@
  * Usage in a consumer's eslint.config.mjs:
  *   import utui from "@uraniumtech/ui/eslint";
  *   export default [...utui];
+ * Consumers of this export must install `typescript-eslint` themselves —
+ * it is deliberately not a runtime dependency of @uraniumtech/ui.
  * Complements scripts/check-brand.sh (which also covers .astro files).
  */
 import tseslint from "typescript-eslint";
