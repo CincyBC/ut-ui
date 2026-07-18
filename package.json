@@ -1,6 +1,6 @@
 {
   "name": "@uraniumtech/ui",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Uranium Technologies design system: brand tokens, React components, and D3 chart wrappers. Agent catalog in llms.txt.",
   "type": "module",
   "license": "MIT",
